@@ -236,22 +236,21 @@ function initParticles() {
    8. HERO ENTRANCE ANIMATION
 ═══════════════════════════════════════════════════════ */
 function runHeroEntrance() {
-  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  // set initial off-screen positions (elements already visible via CSS, GSAP adds motion)
+  gsap.set('#hero-eyebrow', { y: 20, opacity: 0 });
+  gsap.set('#hero-name',    { y: 30, opacity: 0 });
+  gsap.set('#hero-tagline', { y: 20, opacity: 0 });
+  gsap.set('#hero-actions', { y: 20, opacity: 0 });
+  gsap.set('#hero-portrait',{ x: 40, opacity: 0 });
+  gsap.set('#hero-stats',   { y: 15, opacity: 0 });
 
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
   tl.to('#hero-eyebrow',  { opacity: 1, y: 0, duration: 0.7 }, 0.2)
     .to('#hero-name',     { opacity: 1, y: 0, duration: 0.8 }, 0.45)
     .to('#hero-tagline',  { opacity: 1, y: 0, duration: 0.7 }, 0.65)
     .to('#hero-actions',  { opacity: 1, y: 0, duration: 0.6 }, 0.85)
     .to('#hero-portrait', { opacity: 1, x: 0, duration: 1.0, ease: 'power2.out' }, 0.35)
     .to('#hero-stats',    { opacity: 1, y: 0, duration: 0.7 }, 1.0);
-
-  // set initial off-screen positions
-  gsap.set('#hero-eyebrow', { y: 20 });
-  gsap.set('#hero-name',    { y: 30 });
-  gsap.set('#hero-tagline', { y: 20 });
-  gsap.set('#hero-actions', { y: 20 });
-  gsap.set('#hero-portrait',{ x: 40 });
-  gsap.set('#hero-stats',   { y: 15 });
 }
 
 /* ═══════════════════════════════════════════════════════
