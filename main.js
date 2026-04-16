@@ -7,7 +7,7 @@
 'use strict';
 
 // ─── GSAP SETUP ─────────────────────────────────────────
-gsap.registerPlugin(ScrollTrigger, TextPlugin);
+gsap.registerPlugin(ScrollTrigger, TextPlugin, SplitText);
 
 /* ─── RESPECT REDUCED MOTION ────────────────────────── */
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -643,6 +643,18 @@ function initToolChips() {
 /* ═══════════════════════════════════════════════════════
    20. INIT ALL
 ═══════════════════════════════════════════════════════ */
+// ── SAFETY FALLBACK: ensure hero is always visible even if GSAP fails ──
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    ['hero-eyebrow','hero-name','hero-tagline','hero-actions','hero-portrait','hero-stats'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
+    });
+    const loader = document.getElementById('page-loader');
+    if (loader) loader.classList.add('hidden');
+  }, 3500); // runs after animations should have completed
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   initLoader();
   initCursor();
